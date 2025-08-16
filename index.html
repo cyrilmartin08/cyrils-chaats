@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cyril's Chaat Menu</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      background-color: black;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    h1 {
+      font-size: 3.5em;
+      margin-top: 30px;
+      color: #FFED29; /* Yellow color */
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    }
+    
+    .subtitle {
+      color: white;
+      font-size: 1.2em;
+      margin-top: -20px;
+      margin-bottom: 20px;
+    }
+
+    .chef-image {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 115px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
+    }
+
+    .menu-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin: 20px auto;
+      max-width: 1000px;
+    }
+
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 2px solid white;
+      border-radius: 20px;
+      cursor: pointer;
+      width: 220px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .menu-item:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.08);
+    }
+    
+    .selected-item {
+      border-color: #FFED29;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .menu-item img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+      border-radius: 15px;
+    }
+    
+    .item-name {
+        font-weight: bold;
+        font-size: 1.2em;
+        background: linear-gradient(90deg, #FFED29, #FF6347); /* Gradient color for item name */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .item-price {
+        font-size: 1em;
+        margin-top: 5px;
+        color: white; /* Changed to white */
+    }
+
+    .deselect-button {
+      background-color: #FF6347; /* Tomato red */
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 1.5em;
+      line-height: 1;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      cursor: pointer;
+      display: flex; /* Added flex to center the content */
+      align-items: center; /* Vertically centers the content */
+      justify-content: center; /* Horizontally centers the content */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .deselect-button:hover {
+      transform: scale(1.1);
+    }
+    
+    .message-box {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: white;
+        color: black;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        text-align: center;
+    }
+
+    #receipt {
+      margin-top: 40px;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 2px solid white;
+      border-radius: 20px;
+      display: inline-block;
+      min-width: 300px;
+      max-width: 90%;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    #receipt h2 {
+      color: #FFED29;
+      font-size: 2em;
+      margin: 0 0 15px;
+    }
+
+    #receipt p {
+      margin: 0 0 10px;
+      text-align: left;
+    }
+    
+    #receipt .receipt-line {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+    
+    #total-amount {
+        font-size: 1.4em;
+        font-weight: bold;
+        border-top: 1px solid white;
+        padding-top: 10px;
+        margin-top: 15px;
+        background: linear-gradient(90deg, #FFED29, #FF6347); /* Gradient background */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    #qr-code {
+      margin-top: 20px;
+      display: none;
+    }
+
+    #qr-code h3 {
+        color: #FFED29;
+    }
+    
+    #qr-code img {
+      border: 3px solid white;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
+      width: 200px;
+      height: 200px;
+    }
+
+    #timer {
+      font-size: 1.8em;
+      color: #FF6347; /* Tomato red */
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    button {
+      background-color: #FFED29;
+      color: black;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1em;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #FFFACD;
+      transform: translateY(-2px);
+    }
+    
+    .receipt-button {
+      background-color: white;
+      color: black;
+    }
+    
+    .receipt-button:hover {
+        background-color: #eee;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5em;
+      }
+      .menu-item {
+        width: 150px;
+      }
+
+      .menu-item img {
+        max-width: 120px;
+      }
+
+      #receipt {
+        width: 90%;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Cyril's Chaats</h1>
+  <p class="subtitle">Bengaluru | Thrissur | Kochi | Chennai</p>
+  <!-- Using placeholder images as local file paths are not accessible -->
+  <img src="C:\Users\bincy\chaats\images\chef.png" alt="Chef" class="chef-image">
+
+  <div class="menu-container">
+    <div class="menu-item" id="item-1" onclick="addToOrder(1, 'Pani Puri', 30)">
+      <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(1);">&times;</button>
+      <img src="C:\Users\bincy\chaats\images\pani-puri.jpg" alt="Pani Puri">
+      <span class="item-name">Pani Puri</span>
+      <span class="item-price">Rs. 30</span>
+    </div>
+    <div class="menu-item" id="item-2" onclick="addToOrder(2, 'Bhel Puri', 35)">
+      <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(2);">&times;</button>
+      <img src="C:\Users\bincy\chaats\images\bhel-puri.jpg" alt="Bhel Puri">
+      <span class="item-name">Bhel Puri</span>
+      <span class="item-price">Rs. 35</span>
+    </div>
+    <div class="menu-item" id="item-3" onclick="addToOrder(3, 'Masala Puri', 40)">
+      <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(3);">&times;</button>
+      <img src="C:\Users\bincy\chaats\images\masala-puri.jpg" alt="Masala Puri">
+      <span class="item-name">Masala Puri</span>
+      <span class="item-price">Rs. 40</span>
+    </div>
+    <div class="menu-item" id="item-4" onclick="addToOrder(4, 'Sev Puri', 45)">
+      <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(4);">&times;</button>
+      <img src="C:\Users\bincy\chaats\images\sev-puri.jpg" alt="Sev Puri">
+      <span class="item-name">Sev Puri</span>
+      <span class="item-price">Rs. 45</span>
+    </div>
+    <div class="menu-item" id="item-5" onclick="addToOrder(5, 'Dahi Puri', 50)">
+      <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(5);">&times;</button>
+      <img src="C:\Users\bincy\chaats\images\dahi-puri.jpg" alt="Dahi Puri">
+      <span class="item-name">Dahi Puri</span>
+      <span class="item-price">Rs. 50</span>
+    </div>
+    <div class="menu-item" id="item-6" onclick="addToOrder(6, 'Samosa Chaat', 60)">
+      <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(6);">&times;</button>
+      <img src="C:\Users\bincy\chaats\images\samosa-chaat.jpeg" alt="Samosa Chaat">
+      <span class="item-name">Samosa Chaat</span>
+      <span class="item-price">Rs. 60</span>
+    </div>
+  </div>
+  
+  <div class="message-box" id="message-box">
+    <p id="message-text"></p>
+    <button onclick="document.getElementById('message-box').style.display='none'">OK</button>
+  </div>
+
+  <div id="receipt">
+    <h2>Your Order:</h2>
+    <p id="bill-number"></p>
+    <p>Date: <span id="date"></span></p>
+    <div id="order-details"></div>
+    <p id="total-amount">Total Amount: Rs. 0</p>
+    <button class="receipt-button" onclick="generateQRCode()">Pay Now</button>
+  </div>
+
+  <div id="qr-code">
+    <h3>Scan to Pay</h3>
+    <img id="qr-code-image" alt="QR Code">
+    <div id="timer"></div>
+    <p>This QR code will expire in 1 minute.</p>
+  </div>
+
+  <script>
+    let order = {};
+    let totalAmount = 0;
+    let billNumber = 0;
+    let paymentTimer;
+
+    document.getElementById("date").textContent = new Date().toLocaleDateString('en-GB');
+    updateBillNumber();
+
+    function addToOrder(itemNumber, itemName, itemPrice) {
+      if (itemNumber in order) {
+        order[itemNumber].quantity++;
+      } else {
+        order[itemNumber] = { name: itemName, quantity: 1, price: itemPrice };
+      }
+      totalAmount += itemPrice;
+      updateReceipt();
+      updateMenuItem(itemNumber, true);
+    }
+    
+    function removeFromOrder(itemNumber) {
+        if (itemNumber in order) {
+            totalAmount -= order[itemNumber].price;
+            order[itemNumber].quantity--;
+            if (order[itemNumber].quantity <= 0) {
+                delete order[itemNumber];
+                updateMenuItem(itemNumber, false);
+            }
+        }
+        updateReceipt();
+    }
+    
+    function updateMenuItem(itemNumber, isSelected) {
+        const menuItem = document.getElementById(`item-${itemNumber}`);
+        const deselectButton = menuItem.querySelector('.deselect-button');
+        
+        if (isSelected) {
+            menuItem.classList.add('selected-item');
+            deselectButton.style.display = 'flex'; // Use flex to center the cross
+        } else {
+            menuItem.classList.remove('selected-item');
+            deselectButton.style.display = 'none';
+        }
+    }
+
+    function updateReceipt() {
+      let orderDetails = "";
+      for (let itemNumber in order) {
+        const item = order[itemNumber];
+        orderDetails += `<div class="receipt-line"><span>${item.name} (x${item.quantity})</span><span>Rs. ${item.quantity * item.price}</span></div>`;
+      }
+      document.getElementById("order-details").innerHTML = orderDetails;
+      document.getElementById("total-amount").textContent = `Total Amount: Rs. ${totalAmount}`;
+    }
+
+    function updateBillNumber() {
+      billNumber++;
+      document.getElementById("bill-number").textContent = `Bill No: ${billNumber}`;
+    }
+    
+    /**
+     * Shows a custom message box instead of the default alert.
+     * @param {string} message The message to display.
+     */
+    function showMessageBox(message) {
+        const messageBox = document.getElementById('message-box');
+        const messageText = document.getElementById('message-text');
+        messageText.textContent = message;
+        messageBox.style.display = 'block';
+    }
+
+    async function generateQRCode() {
+      // Create a transaction object with all the required data
+      const transactionData = {
+        bill_number: document.getElementById("bill-number").textContent,
+        date: document.getElementById("date").textContent,
+        time_of_transaction: new Date().toLocaleTimeString(),
+        item_details: Object.values(order),
+        total_amount: totalAmount,
+        transaction_id: "UPI-PLACEHOLDER", // This will be replaced by the database's ID
+        transaction_info: "Success" // Assuming success for now
+      };
+      
+      try {
+        // Send the transaction data to the backend server
+        const response = await fetch('http://127.0.0.1:3000/save-transaction', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(transactionData),
+        });
+        
+        // Check if the server responded with a success status
+        if (response.ok) {
+          const result = await response.json();
+          console.log(result.message);
+          showMessageBox("Order saved! Please scan the QR code to pay.");
+        } else {
+          // Handle server-side errors
+          const errorResult = await response.json();
+          console.error("Failed to save transaction:", errorResult.error);
+          showMessageBox("Error saving order. Please try again.");
+          return; // Stop execution if there's an error
+        }
+      } catch (error) {
+        // Handle network or other errors
+        console.error("Network error:", error);
+        showMessageBox("Network error. Please ensure the server is running.");
+        return; // Stop execution if there's an error
+      }
+      
+      // If the transaction was successfully sent to the server, proceed with QR code display
+      const qrCodeElement = document.getElementById("qr-code");
+      const qrCodeImage = document.getElementById("qr-code-image");
+      const timerElement = document.getElementById("timer");
+
+      const upiID = "cyrilmartin0812@okhdfcbank";
+      const name = "Cyril's Chaats";
+      const url = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&am=${totalAmount}&cu=INR`;
+
+      qrCodeImage.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(url)}&size=200x200`;
+
+      qrCodeElement.style.display = "block";
+
+      let timeLeft = 60;
+      timerElement.textContent = `Time Remaining: ${timeLeft} seconds`;
+
+      if (paymentTimer) {
+        clearInterval(paymentTimer);
+      }
+      
+      paymentTimer = setInterval(() => {
+        timeLeft--;
+        timerElement.textContent = `Time Remaining: ${timeLeft} seconds`;
+
+        if (timeLeft <= 0) {
+          clearInterval(paymentTimer);
+          cancelOrder();
+        }
+      }, 1000);
+    }
+
+    function cancelOrder() {
+      document.getElementById("qr-code").style.display = "none";
+      order = {};
+      totalAmount = 0;
+      updateReceipt();
+      updateBillNumber();
+      document.querySelectorAll('.menu-item').forEach(item => {
+          item.classList.remove('selected-item');
+          item.querySelector('.deselect-button').style.display = 'none';
+      });
+      showMessageBox("Order cancelled. Payment time expired. Please place your order again.");
+    }
+  </script>
+</body>
+</html>
