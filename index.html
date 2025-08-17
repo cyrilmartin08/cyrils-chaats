@@ -89,7 +89,7 @@
     .item-price {
         font-size: 1em;
         margin-top: 5px;
-        color: white; /* Changed to white */
+        color: white;
     }
 
     .deselect-button {
@@ -105,9 +105,9 @@
       top: -10px;
       right: -10px;
       cursor: pointer;
-      display: flex; /* Added flex to center the content */
-      align-items: center; /* Vertically centers the content */
-      justify-content: center; /* Horizontally centers the content */
+      display: none;  /* 🔹 Hides the cross initially */
+      align-items: center;
+      justify-content: center;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       transition: transform 0.2s;
     }
@@ -167,7 +167,7 @@
         border-top: 1px solid white;
         padding-top: 10px;
         margin-top: 15px;
-        background: linear-gradient(90deg, #FFED29, #FF6347); /* Gradient background */
+        background: linear-gradient(90deg, #FFED29, #FF6347);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -191,7 +191,7 @@
 
     #timer {
       font-size: 1.8em;
-      color: #FF6347; /* Tomato red */
+      color: #FF6347;
       margin-top: 15px;
       font-weight: bold;
     }
@@ -227,7 +227,7 @@
         margin-top: 40px;
         padding: 20px;
         font-size: 0.9em;
-        color: white; /* Changed to pure white */
+        color: white;
     }
 
     @media (max-width: 768px) {
@@ -255,7 +255,6 @@
 <body>
   <h1>Cyril's Chaats</h1>
   <p class="subtitle">Bengaluru | Thrissur | Kochi | Chennai</p>
-  <!-- Using placeholder images as local file paths are not accessible -->
   <img src="\images\chef.png" alt="Chef" class="chef-image">
 
   <div class="menu-container">
@@ -360,7 +359,7 @@
         
         if (isSelected) {
             menuItem.classList.add('selected-item');
-            deselectButton.style.display = 'flex'; // Use flex to center the cross
+            deselectButton.style.display = 'flex'; 
         } else {
             menuItem.classList.remove('selected-item');
             deselectButton.style.display = 'none';
@@ -382,10 +381,6 @@
       document.getElementById("bill-number").textContent = `Bill No: ${billNumber}`;
     }
     
-    /**
-     * Shows a custom message box instead of the default alert.
-     * @param {string} message The message to display.
-     */
     function showMessageBox(message) {
         const messageBox = document.getElementById('message-box');
         const messageText = document.getElementById('message-text');
@@ -394,19 +389,17 @@
     }
 
     async function generateQRCode() {
-      // Create a transaction object with all the required data
       const transactionData = {
         bill_number: document.getElementById("bill-number").textContent,
         date: document.getElementById("date").textContent,
         time_of_transaction: new Date().toLocaleTimeString(),
         item_details: Object.values(order),
         total_amount: totalAmount,
-        transaction_id: "UPI-PLACEHOLDER", // This will be replaced by the database's ID
-        transaction_info: "Success" // Assuming success for now
+        transaction_id: "UPI-PLACEHOLDER",
+        transaction_info: "Success"
       };
       
       try {
-        // Send the transaction data to the backend server
         const response = await fetch('http://127.0.0.1:3000/save-transaction', {
           method: 'POST',
           headers: {
@@ -415,26 +408,22 @@
           body: JSON.stringify(transactionData),
         });
         
-        // Check if the server responded with a success status
         if (response.ok) {
           const result = await response.json();
           console.log(result.message);
           showMessageBox("Order saved! Please scan the QR code to pay.");
         } else {
-          // Handle server-side errors
           const errorResult = await response.json();
           console.error("Failed to save transaction:", errorResult.error);
           showMessageBox("Error saving order. Please try again.");
-          return; // Stop execution if there's an error
+          return;
         }
       } catch (error) {
-        // Handle network or other errors
         console.error("Network error:", error);
         showMessageBox("Network error. Please ensure the server is running.");
-        return; // Stop execution if there's an error
+        return;
       }
       
-      // If the transaction was successfully sent to the server, proceed with QR code display
       const qrCodeElement = document.getElementById("qr-code");
       const qrCodeImage = document.getElementById("qr-code-image");
       const timerElement = document.getElementById("timer");
