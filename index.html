@@ -18,7 +18,7 @@
       color: #FFED29; /* Yellow color */
       text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
     }
-    
+
     .subtitle {
       color: white;
       font-size: 1.2em;
@@ -65,7 +65,7 @@
       background-color: rgba(255, 255, 255, 0.3);
       transform: scale(1.08);
     }
-    
+
     .selected-item {
       border-color: #FFED29;
       background-color: rgba(255, 255, 255, 0.3);
@@ -77,19 +77,19 @@
       margin-bottom: 15px;
       border-radius: 15px;
     }
-    
+
     .item-name {
-        font-weight: bold;
-        font-size: 1.2em;
-        background: linear-gradient(90deg, #FFED29, #FF6347); /* Gradient color for item name */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+      font-weight: bold;
+      font-size: 1.2em;
+      background: linear-gradient(90deg, #FFED29, #FF6347); /* Gradient */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .item-price {
-        font-size: 1em;
-        margin-top: 5px;
-        color: white;
+      font-size: 1em;
+      margin-top: 5px;
+      color: white;
     }
 
     .deselect-button {
@@ -105,7 +105,7 @@
       top: -10px;
       right: -10px;
       cursor: pointer;
-      display: none;  /* 🔹 Hides the cross initially */
+      display: none; /* 🔹 Hidden initially */
       align-items: center;
       justify-content: center;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -115,20 +115,20 @@
     .deselect-button:hover {
       transform: scale(1.1);
     }
-    
+
     .message-box {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 20px;
-        background-color: white;
-        color: black;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        text-align: center;
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: white;
+      color: black;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      text-align: center;
     }
 
     #receipt {
@@ -154,22 +154,22 @@
       margin: 0 0 10px;
       text-align: left;
     }
-    
+
     #receipt .receipt-line {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
     }
-    
+
     #total-amount {
-        font-size: 1.4em;
-        font-weight: bold;
-        border-top: 1px solid white;
-        padding-top: 10px;
-        margin-top: 15px;
-        background: linear-gradient(90deg, #FFED29, #FF6347);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+      font-size: 1.4em;
+      font-weight: bold;
+      border-top: 1px solid white;
+      padding-top: 10px;
+      margin-top: 15px;
+      background: linear-gradient(90deg, #FFED29, #FF6347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     #qr-code {
@@ -178,9 +178,9 @@
     }
 
     #qr-code h3 {
-        color: #FFED29;
+      color: #FFED29;
     }
-    
+
     #qr-code img {
       border: 3px solid white;
       border-radius: 15px;
@@ -213,21 +213,21 @@
       background-color: #FFFACD;
       transform: translateY(-2px);
     }
-    
+
     .receipt-button {
       background-color: white;
       color: black;
     }
-    
+
     .receipt-button:hover {
-        background-color: #eee;
+      background-color: #eee;
     }
-    
+
     .footer {
-        margin-top: 40px;
-        padding: 20px;
-        font-size: 0.9em;
-        color: white;
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 0.9em;
+      color: white;
     }
 
     @media (max-width: 768px) {
@@ -237,15 +237,12 @@
       .menu-item {
         width: 150px;
       }
-
       .menu-item img {
         max-width: 120px;
       }
-
       #receipt {
         width: 90%;
       }
-
       button {
         width: 100%;
       }
@@ -264,30 +261,35 @@
       <span class="item-name">Pani Puri</span>
       <span class="item-price">Rs. 30</span>
     </div>
+
     <div class="menu-item" id="item-2" onclick="addToOrder(2, 'Bhel Puri', 35)">
       <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(2);">&times;</button>
       <img src="\images\bhel-puri.jpg" alt="Bhel Puri">
       <span class="item-name">Bhel Puri</span>
       <span class="item-price">Rs. 35</span>
     </div>
+
     <div class="menu-item" id="item-3" onclick="addToOrder(3, 'Masala Puri', 40)">
       <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(3);">&times;</button>
       <img src="\images\masala-puri.jpg" alt="Masala Puri">
       <span class="item-name">Masala Puri</span>
       <span class="item-price">Rs. 40</span>
     </div>
+
     <div class="menu-item" id="item-4" onclick="addToOrder(4, 'Sev Puri', 45)">
       <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(4);">&times;</button>
       <img src="\images\sev-puri.jpg" alt="Sev Puri">
       <span class="item-name">Sev Puri</span>
       <span class="item-price">Rs. 45</span>
     </div>
+
     <div class="menu-item" id="item-5" onclick="addToOrder(5, 'Dahi Puri', 50)">
       <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(5);">&times;</button>
       <img src="\images\dahi-puri.jpg" alt="Dahi Puri">
       <span class="item-name">Dahi Puri</span>
       <span class="item-price">Rs. 50</span>
     </div>
+
     <div class="menu-item" id="item-6" onclick="addToOrder(6, 'Samosa Chaat', 60)">
       <button class="deselect-button" onclick="event.stopPropagation(); removeFromOrder(6);">&times;</button>
       <img src="\images\samosa-chaat.jpeg" alt="Samosa Chaat">
@@ -295,7 +297,7 @@
       <span class="item-price">Rs. 60</span>
     </div>
   </div>
-  
+
   <div class="message-box" id="message-box">
     <p id="message-text"></p>
     <button onclick="document.getElementById('message-box').style.display='none'">OK</button>
@@ -327,7 +329,8 @@
     let billNumber = 0;
     let paymentTimer;
 
-    document.getElementById("date").textContent = new Date().toLocaleDateString('en-GB');
+    document.getElementById("date").textContent =
+      new Date().toLocaleDateString('en-GB');
     updateBillNumber();
 
     function addToOrder(itemNumber, itemName, itemPrice) {
@@ -340,52 +343,57 @@
       updateReceipt();
       updateMenuItem(itemNumber, true);
     }
-    
+
     function removeFromOrder(itemNumber) {
-        if (itemNumber in order) {
-            totalAmount -= order[itemNumber].price;
-            order[itemNumber].quantity--;
-            if (order[itemNumber].quantity <= 0) {
-                delete order[itemNumber];
-                updateMenuItem(itemNumber, false);
-            }
+      if (itemNumber in order) {
+        totalAmount -= order[itemNumber].price;
+        order[itemNumber].quantity--;
+        if (order[itemNumber].quantity <= 0) {
+          delete order[itemNumber];
+          updateMenuItem(itemNumber, false);
         }
-        updateReceipt();
+      }
+      updateReceipt();
     }
-    
+
     function updateMenuItem(itemNumber, isSelected) {
-        const menuItem = document.getElementById(`item-${itemNumber}`);
-        const deselectButton = menuItem.querySelector('.deselect-button');
-        
-        if (isSelected) {
-            menuItem.classList.add('selected-item');
-            deselectButton.style.display = 'flex'; 
-        } else {
-            menuItem.classList.remove('selected-item');
-            deselectButton.style.display = 'none';
-        }
+      const menuItem = document.getElementById(`item-${itemNumber}`);
+      const deselectButton = menuItem.querySelector('.deselect-button');
+      if (isSelected) {
+        menuItem.classList.add('selected-item');
+        deselectButton.style.display = 'flex';
+      } else {
+        menuItem.classList.remove('selected-item');
+        deselectButton.style.display = 'none';
+      }
     }
 
     function updateReceipt() {
       let orderDetails = "";
       for (let itemNumber in order) {
         const item = order[itemNumber];
-        orderDetails += `<div class="receipt-line"><span>${item.name} (x${item.quantity})</span><span>Rs. ${item.quantity * item.price}</span></div>`;
+        orderDetails +=
+          `<div class="receipt-line">
+            <span>${item.name} (x${item.quantity})</span>
+            <span>Rs. ${item.quantity * item.price}</span>
+          </div>`;
       }
       document.getElementById("order-details").innerHTML = orderDetails;
-      document.getElementById("total-amount").textContent = `Total Amount: Rs. ${totalAmount}`;
+      document.getElementById("total-amount").textContent =
+        `Total Amount: Rs. ${totalAmount}`;
     }
 
     function updateBillNumber() {
       billNumber++;
-      document.getElementById("bill-number").textContent = `Bill No: ${billNumber}`;
+      document.getElementById("bill-number").textContent =
+        `Bill No: ${billNumber}`;
     }
-    
+
     function showMessageBox(message) {
-        const messageBox = document.getElementById('message-box');
-        const messageText = document.getElementById('message-text');
-        messageText.textContent = message;
-        messageBox.style.display = 'block';
+      const messageBox = document.getElementById('message-box');
+      const messageText = document.getElementById('message-text');
+      messageText.textContent = message;
+      messageBox.style.display = 'block';
     }
 
     async function generateQRCode() {
@@ -398,16 +406,14 @@
         transaction_id: "UPI-PLACEHOLDER",
         transaction_info: "Success"
       };
-      
+
       try {
-        const response = await fetch('http://127.0.0.1:3000/save-transaction', {
+        const response = await fetch('/api/save-transaction', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(transactionData),
         });
-        
+
         if (response.ok) {
           const result = await response.json();
           console.log(result.message);
@@ -423,7 +429,7 @@
         showMessageBox("Network error. Please ensure the server is running.");
         return;
       }
-      
+
       const qrCodeElement = document.getElementById("qr-code");
       const qrCodeImage = document.getElementById("qr-code-image");
       const timerElement = document.getElementById("timer");
@@ -432,8 +438,8 @@
       const name = "Cyril's Chaats";
       const url = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&am=${totalAmount}&cu=INR`;
 
-      qrCodeImage.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(url)}&size=200x200`;
-
+      qrCodeImage.src =
+        `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(url)}&size=200x200`;
       qrCodeElement.style.display = "block";
 
       let timeLeft = 60;
@@ -442,11 +448,10 @@
       if (paymentTimer) {
         clearInterval(paymentTimer);
       }
-      
+
       paymentTimer = setInterval(() => {
         timeLeft--;
         timerElement.textContent = `Time Remaining: ${timeLeft} seconds`;
-
         if (timeLeft <= 0) {
           clearInterval(paymentTimer);
           cancelOrder();
@@ -461,8 +466,8 @@
       updateReceipt();
       updateBillNumber();
       document.querySelectorAll('.menu-item').forEach(item => {
-          item.classList.remove('selected-item');
-          item.querySelector('.deselect-button').style.display = 'none';
+        item.classList.remove('selected-item');
+        item.querySelector('.deselect-button').style.display = 'none';
       });
       showMessageBox("Order cancelled. Payment time expired. Please place your order again.");
     }
