@@ -408,7 +408,7 @@
       };
 
       try {
-        const response = await fetch('/api/save-transaction', {
+        const response = await fetch('https://cyrils-chaats.vercel.app/api/save-transactions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(transactionData),
