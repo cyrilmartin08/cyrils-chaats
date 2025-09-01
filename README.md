@@ -61,19 +61,21 @@ Now, you can open the `index.html` file in your web browser. You can either doub
 ## Project Structure 📂
 
 ```
-chaat-app/
-├── public/
-│   ├── images/
-│   │   ├── (food images)
-│   ├── index.html
-│   └── styles.css
-├── server/
-│   ├── node_modules/
-│   ├── server.js
-│   └── package.json
-├── .gitignore
-├── package.json
-└── README.md
+CHAATS/
+│── .dist/ # Build output (if any)
+│── api/ # Backend API routes
+│ ├── get-upi-id.js # Returns UPI ID securely from .env
+│ └── save-transactions.js # Saves order transactions to MongoDB
+│── images/ # Static assets (images, logos, etc.)
+│── node_modules/ # Installed dependencies
+│── .env # Environment variables (not pushed to GitHub)
+│── .gitignore # Ignored files & folders
+│── index.html # Main frontend entry point
+│── orderForm.js # Frontend order form + QR generation logic
+│── package.json # Project metadata & dependencies
+│── package-lock.json # Dependency lock file
+│── README.md # Project documentation
+│── LICENSE # License information
 ```
 
 <!--
