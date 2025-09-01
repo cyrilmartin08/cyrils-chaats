@@ -434,9 +434,14 @@
       const qrCodeImage = document.getElementById("qr-code-image");
       const timerElement = document.getElementById("timer");
 
-      const upiId = process.env.UPI_ID;
-      const name = "Cyril's Chaats";
-      const url = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&am=${totalAmount}&cu=INR`;
+      // fetch UPI ID from backend API
+const upiResponse = await fetch("/api/get-upi-id");
+const upiData = await upiResponse.json();
+const upiId = upiData.upiId;
+
+const name = "Cyril's Chaats";
+const url = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${totalAmount}&cu=INR`;
+
 
       qrCodeImage.src =
         `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(url)}&size=200x200`;
